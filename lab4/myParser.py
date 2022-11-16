@@ -18,7 +18,16 @@ def getContains(line):
     if pos != -1:
         return searchLine[:pos]
     else:
-        return ""
+        if searchLine.find("true") == -1 and searchLine.find("null") == -1:
+            try:
+                int(searchLine)
+                return searchLine.strip()
+            except:
+                return ""
+        else:
+            return searchLine.strip()
+
+
 
 
 def parseToXML(fileJSON, fileXML):
