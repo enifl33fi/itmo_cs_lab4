@@ -16,7 +16,17 @@ def getContains(line):
     line = re.split(r":\s*\"", line)
     lengthContains = len(line)
     if lengthContains < 2:
-        return ""
+        if lengthContains == 1:
+            if line[0].find("true") == -1 and line[0].find("null") == -1:
+                try:
+                    int(line[0])
+                    return line[0].strip()
+                except:
+                    return ""
+            else:
+                return line[0].strip()
+        else:
+            return ""
     elif lengthContains > 2:
         raise ValueError("Ошибка значения")
     line = line[1]
