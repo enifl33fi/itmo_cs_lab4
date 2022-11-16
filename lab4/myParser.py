@@ -28,8 +28,6 @@ def getContains(line):
             return searchLine.strip()
 
 
-
-
 def parseToXML(fileJSON, fileXML):
     with open(fileJSON, encoding='utf-8') as contentJSON, open(fileXML, 'w', encoding='utf-8') as contentXML:
         contentXML.write('''<?xml version="1.0" encoding="UTF-8" ?>''' + '\n')
@@ -54,7 +52,7 @@ def parseToXML(fileJSON, fileXML):
                         contentXML.write((indentationLevel + 1) * indent + tag + contain + closeTag + '\n')
                         contentXML.write(indentationLevel * indent + getCloseTag(currentTags[indentationLevel]) + '\n')
                     # обрабатываем строки вида "tag"{
-                    #                      }
+                    #                          }
                     else:
                         tag = getTag(line)
                         currentTags.append(tag)
@@ -95,19 +93,5 @@ def parseToXML(fileJSON, fileXML):
                         tag = getTag(line)
                         currentTags.append(tag)
                         squareBracketFlag = True
-
-
-def getHeader(line):
-    searchLine = line[line.find('"') + 1:]
-    header = searchLine[:searchLine.find('"')]
-    return header +','
-def getContent(line):
-    searchLine = line[line.find(':') + 1:]
-    searchLine = searchLine[searchLine.find('"') + 1:]
-    pos = searchLine.find('"')
-    if pos != -1:
-        return searchLine[:pos]
-    else:
-        return ""
 
 parseToXML('scheduleJSON.json', 'myScheduleXML.xml')
