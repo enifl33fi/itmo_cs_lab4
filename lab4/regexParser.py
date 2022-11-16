@@ -52,7 +52,7 @@ def parseToXML(fileJSON, fileXML):
             if len(re.findall(r'\{', line)) > 0:
                 if len(line.replace(" ", "")) > 1:
                     contain = getContains(line)
-                    # из строки вида {"tag": "content"} формируем <tag>content</tag>
+                    # обрабатываем из строки вида {"tag": "content"}
                     if len(re.findall(r':.*{.*', line)) == 0:
                         tag = getTag(line)
                         closeTag = getCloseTag(tag)
