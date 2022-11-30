@@ -21,19 +21,24 @@ def parseToTSV(fileJSON, fileTSV):
             # удаляем переносы строки
             line = line.replace("\n", "")
             indent = (len(line) - len(line.lstrip())) // indentLenght - 1
+            # окончание ряда
             if indent == 3:
                 if line.find(("}")) != -1:
                     content += "\n"
             elif indent == 5:
+                # начало блока
                 if line.find(("{")) != -1:
                     blockFlag = True
+                # конец блока
                 elif line.find(("}")) != -1:
                     blockFlag = False
                     content = content[:-2]
                     content += '\t'
+            # сбор содержимого
             elif indent == 6:
                 if blockFlag:
                     content += getContent(line) + '\\n'
         contentTSV.write(content)
-parseToTSV('scheduleJSON.json', "scheduleTSV.tsv")
 
+
+parseToTSV('scheduleJSON.json', "scheduleTSV.tsv")
