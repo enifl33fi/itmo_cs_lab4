@@ -42,7 +42,7 @@ def parseToXML(fileJSON, fileXML):
     with open(fileJSON, encoding='utf-8') as contentJSON, open(fileXML, 'w', encoding='utf-8') as contentXML:
         contentXML.write('''<?xml version="1.0" encoding="UTF-8" ?>''' + '\n')
         indentationLevel = 0
-        indent = "    "
+        indent = "\t"
         currentTags = []
         squareBracketFlag = False
         linesJSON = contentJSON.readlines()[1: -1]
